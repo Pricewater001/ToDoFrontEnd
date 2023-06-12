@@ -9,81 +9,58 @@ import
   Divider,
   Button,
   ButtonGroup,
-  useDisclosure,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
-  FormControl,
-  FormLabel,
-  RadioGroup,
-  Radio,
-  HStack,
+//   useDisclosure,
+//   Modal,
+//   ModalOverlay,
+//   ModalContent,
+//   ModalHeader,
+//   ModalFooter,
+//   ModalBody,
+//   ModalCloseButton,
+//   FormControl,
+//   FormLabel,
+//   RadioGroup,
+//   Radio,
+//   HStack,
   // FormErrorMessage,
-  Input,
+//   Input,
   // FormHelperText,
 } from '@chakra-ui/react';
-import styles from './TasksList.module.css'
-import addIcon from '../../assets/PwC_Funct_Icons_Plus_Outline_Black_RGB.png'
+import styles from './DoneTasksList.module.css'
 
-function TasksList() {
-  const { isOpen, onOpen, onClose } = useDisclosure()
+function DoneTasksList() {
+//   const { isOpen, onOpen, onClose } = useDisclosure()
   return (
     <>
     <div className={styles.container}>
       <div className={styles.title}>
-        <h2>My To-Do List</h2>
-        <a href=""><span title="Add New Task"><img src={addIcon} alt="" /></span></a>
+        <h2>Completed Tasks</h2>
       </div>
       <Card maxW='450px'>
         <CardBody>
           <Stack mt='6' spacing='3'>
-            <Heading size='md'>Task 1</Heading>
+            <Heading size='md'>Task 3</Heading>
             <Text>
-              Create React App
+              Edit code
             </Text>
           </Stack>
         </CardBody>
         <Divider />
         <CardFooter>
           <ButtonGroup spacing='2'>
-            <Button onClick={onOpen} variant='solid' colorScheme='orange'>
-              Edit
+            <Button variant='solid' colorScheme='orange'>
+              Remove
             </Button>
             <Button variant='ghost' colorScheme='orange'>
-              Mark as Done
+              Mark as Incomplete
             </Button>
           </ButtonGroup>
         </CardFooter>
       </Card>
 
-      <Card maxW='450px'>
-        <CardBody>
-          <Stack mt='6' spacing='3'>
-            <Heading size='md'>Task 2</Heading>
-            <Text>
-              Create Angular App
-            </Text>
-          </Stack>
-        </CardBody>
-        <Divider />
-        <CardFooter>
-          <ButtonGroup spacing='2'>
-            <Button  onClick={onOpen} variant='solid' colorScheme='orange'>
-              Edit
-            </Button>
-            <Button variant='ghost' colorScheme='orange'>
-              Mark as Done
-            </Button>
-          </ButtonGroup>
-        </CardFooter>
-      </Card>
     </div>
 {/* ******************************** MODAL ********************************* */}
-    <Modal isOpen={isOpen} onClose={onClose}>
+    {/* <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>Task 1</ModalHeader>
@@ -115,9 +92,9 @@ function TasksList() {
             <Button variant='ghost'>Mark as Done</Button>
           </ModalFooter>
         </ModalContent>
-      </Modal>
+      </Modal> */}
     </>
   )
 }
 
-export default TasksList
+export default DoneTasksList

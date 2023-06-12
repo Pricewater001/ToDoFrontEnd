@@ -8,12 +8,21 @@ import
   Text,
   Divider,
   Button,
-  ButtonGroup
+  ButtonGroup,
+  useDisclosure,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
 } from '@chakra-ui/react'
 import styles from './TasksList.module.css'
 import addIcon from '../../assets/PwC_Funct_Icons_Plus_Outline_Black_RGB.png'
 
 function TasksList() {
+  const { isOpen, onOpen, onClose } = useDisclosure()
   return (
     <>
     <div className={styles.container}>
@@ -33,7 +42,7 @@ function TasksList() {
         <Divider />
         <CardFooter>
           <ButtonGroup spacing='2'>
-            <Button variant='solid' colorScheme='orange'>
+            <Button onClick={onOpen} variant='solid' colorScheme='orange'>
               Edit
             </Button>
             <Button variant='ghost' colorScheme='orange'>
@@ -65,6 +74,24 @@ function TasksList() {
         </CardFooter>
       </Card>
     </div>
+
+    <Modal isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Modal Title</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia sequi nihil eum aliquid perferendis, tempore praesentium laudantium laboriosam fugit fugiat quo impedit debitis possimus, consectetur odio cumque corporis quis. Ab!</p>
+          </ModalBody>
+
+          <ModalFooter>
+            <Button colorScheme='blue' mr={3} onClick={onClose}>
+              Close
+            </Button>
+            <Button variant='ghost'>Secondary Action</Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     </>
   )
 }

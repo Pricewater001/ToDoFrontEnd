@@ -17,7 +17,7 @@ import { useForm } from "react-hook-form";
 import ShadowBox from "./ShadowBox";
 import "../assets/css/loging.css";
 
-const LoginForm = ({setShowLoginForm}) => {
+const LoginForm = ({ setShowLoginForm }) => {
   const { handleSubmit, errors, register } = useForm();
   const [show, setShow] = useState(false);
   const [email, setEmail] = useState("");
@@ -43,8 +43,35 @@ const LoginForm = ({setShowLoginForm}) => {
   };
 
   const onSubmit = async () => {
-    if (email.length === 0 || password.length === 0) {
-      alert("please fill all data");
+    if (!email) {
+      toast({
+        title: "Error",
+        description: "Please Enter a valid Email",
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+      });
+      return;
+    }
+    if (!password) {
+      toast({
+        title: "Error",
+        description: "Please Enter a valid password",
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+      });
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      toast({
+        title: "Error",
+        description: "The passwords do not match",
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+      });
       return;
     }
     const data = {
@@ -63,7 +90,7 @@ const LoginForm = ({setShowLoginForm}) => {
       <Text fontSize="4xl" color="white">
         TO DO LIST
       </Text>
-      <Text fontSize="6xl"  width="100%" color="white">
+      <Text fontSize="6xl" width="100%" color="white">
         It's nice to have you back
       </Text>
       <Text mb="8px" mt={4} color="white">
@@ -121,7 +148,8 @@ const LoginForm = ({setShowLoginForm}) => {
           color="white"
           variant="solid"
           mt={2}
-          onClick={handleSubmit(onSubmit)}>
+          onClick={handleSubmit(onSubmit)}
+        >
           Log in
         </Button>
       </HStack>
@@ -130,7 +158,8 @@ const LoginForm = ({setShowLoginForm}) => {
         color="white"
         variant="link"
         mt={4}
-        onClick={handleSwitchToLogin}>
+        onClick={handleSwitchToLogin}
+      >
         Dont have an account ? Sign up
       </Button>
     </ShadowBox>

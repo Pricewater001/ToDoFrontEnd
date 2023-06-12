@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import {
-  Box,
+  useToast,
   Button,
   VStack,
   HStack,
@@ -24,6 +24,7 @@ const Signup = ({ setShowLoginForm }) => {
   const [show, setShow] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const toast = useToast()
   const [confirmPassword, setConfirmPassword] = useState("");
 
   const handleClick = () => setShow(!show);
@@ -51,14 +52,42 @@ const Signup = ({ setShowLoginForm }) => {
   };
 
   const onSubmit = async () => {
+    if(!email){
+      toast({
+        title: 'Error',
+        description: "Please Enter a valid Email",
+        status: 'error',
+        duration: 9000,
+        isClosable: true,
+      })
+      return;
+    }
+    if(!password){
+      toast({
+        title: 'Error',
+        description: "Please Enter a valid password",
+        status: 'error',
+        duration: 9000,
+        isClosable: true,
+      })
+      return;
+    }
+  
     if (password !== confirmPassword) {
-      alert("The passwords do not match");
+      toast({
+        title: 'Error',
+        description: "The passwords do not match",
+        status: 'error',
+        duration: 9000,
+        isClosable: true,
+      })
       return;
     }
     const data = {
       email,
       password,
       confirmPassword,
+      rememberMe
     };
 
     console.log("Form data", data);

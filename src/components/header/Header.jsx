@@ -2,8 +2,15 @@ import styles from './Header.module.css'
 import PwCLogo from '../../assets/PwC_Outline_Logo_Black_RGB_cropped.png'
 import searchIcon from '../../assets/PwC_Funct_Icons_Search_Outline_Black_RGB.png'
 import notification from '../../assets/PwC_Funct_Icons_Notifications_Outline_Black_RGB.png'
-import profile from '../../assets/PwC_Funct_Icons_Avatar_Outline_Orange_RGB.png'
+// import profile from '../../assets/PwC_Funct_Icons_Avatar_Outline_Orange_RGB.png'
 import question from '../../assets/PwC_Funct_Icons_HelpQuestion_Outline_Black_RGB.png'
+import { 
+    Avatar,
+    // AvatarBadge, 
+    // AvatarGroup, 
+    Wrap, 
+    WrapItem
+ } from '@chakra-ui/react'
 
 
 function Header() {
@@ -23,7 +30,16 @@ function Header() {
                 <img src={searchIcon} alt="" />
                 <img src={notification} alt="" />
                 <img src={question} alt="" />
-                <img className={styles.profile} src={profile} alt="" />
+                <Wrap>
+                <WrapItem>
+                    <Avatar
+                    size='sm'
+                    name='Julia Faqir'
+                    bg='gray.400'
+                     />
+                </WrapItem>
+                </Wrap>
+
             </div>
         </div>
     </>

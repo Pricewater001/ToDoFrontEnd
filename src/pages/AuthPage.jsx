@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../Context/AuthContext";
 import "../assets/css/loging.css"
 
+
 const AuthPage = () => {
   const [showLoginForm, setShowLoginForm] = useState(false);
   const { isLoggedIn } = useContext(AuthContext);

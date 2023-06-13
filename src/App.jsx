@@ -18,6 +18,10 @@ function App() {
       element: <HomePage />,
     },
     {
+      path: "/home",
+      element: <HomePage />,
+    },
+    {
       path: "/Auth",
       element: <AuthPage />,
     },

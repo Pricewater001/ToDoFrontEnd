@@ -1,26 +1,26 @@
-import React, { createContext, useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { createContext, useEffect, useState } from 'react';
 
 export const AuthContext = createContext();
-
 export const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const history = useHistory();
 
   useEffect(() => {
     const token = localStorage.getItem('token');
-    setIsLoggedIn(!!token); // Set isLoggedIn based on the presence of token
-  }, []);
+    if (token) {
+      setIsLoggedIn(true);
+    }else{
+      setIsLoggedIn(false);
+    }
+  });
 
   const login = () => {
     setIsLoggedIn(true);
-    history.push('/'); // Redirect to home page after successful login
+    // localStorage.setItem('token', 'test');
   };
 
   const logout = () => {
     setIsLoggedIn(false);
-    localStorage.removeItem('token'); // Remove token from storage on logout
-    history.push('/Auth'); // Redirect to Auth page after logout
+    localStorage.removeItem('token');
   };
 
   const contextValue = {

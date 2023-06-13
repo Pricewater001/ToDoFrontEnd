@@ -10,8 +10,18 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "@chakra-ui/icons": "^2.0.19",
+    "@chakra-ui/react": "^2.7.0",
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "framer-motion": "^10.12.16",
+    "localforage": "^1.10.0",
+    "match-sorter": "^6.3.1",
+    "nodemon": "^2.0.22",
+    "react-dom": "^18.2.0",
+    "react-hook-form": "^7.44.3",
+    "react-router-dom": "^6.12.1",
+    "sort-by": "^1.2.0"
   },
   "devDependencies": {
     "@types/react": "^18.0.37",

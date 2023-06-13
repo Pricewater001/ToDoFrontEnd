@@ -1,0 +1,21 @@
+.container{
+    display:flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    align-items: center;
+    padding:10px;
+    p{
+        font-size: 14px;
+    }
+}
+
+.footerLinks{
+    display: flex;
+    justify-content: flex-start;
+    gap:10px;
+    a{
+        text-decoration: none;
+        color:black;
+        font-size: 12px;
+    }
+}

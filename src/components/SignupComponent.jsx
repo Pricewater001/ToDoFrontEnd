@@ -96,7 +96,7 @@ const Signup = ({ setShowLoginForm }) => {
   return (
     <ShadowBox>
       <Text fontSize="4xl" color="white">
-        TO DO List
+        TO DO LIST
       </Text>
       <Text fontSize="6xl" width="100%" color="white">
         {" "}

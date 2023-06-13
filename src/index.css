@@ -1,4 +1,5 @@
 body {
   min-width: 300px;
-  height: auto;
+  /* height: auto; */
+  background-color: orangered;
 }

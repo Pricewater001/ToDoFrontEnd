@@ -1,0 +1,26 @@
+.container{
+    display: flex;
+    width:200px;
+    border-radius:10px;
+    padding-top: 10px;
+    a{
+        text-decoration: none;
+        color: black;
+    }
+    a:active{
+        font-weight: 800;;
+    }
+    ul{
+        width:200px;
+        padding-left:15px;
+    }
+    li{
+        padding:5px;
+        margin-bottom:10px;
+        list-style-type: none;
+        border-radius: 5px;
+    }
+    li:hover{
+        background-color: #eaeaea;
+    }
+}

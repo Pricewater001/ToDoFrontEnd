@@ -1,0 +1,20 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+  width: 40%;
+}
+.container h2 {
+  font-size: 26px;
+  font-weight: 600;
+}
+
+.title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.title img {
+  width: 25px;
+}/*# sourceMappingURL=TasksList.module.css.map */

@@ -1,0 +1,26 @@
+.container {
+  display: flex;
+  width: 200px;
+  border-radius: 10px;
+  padding-top: 10px;
+}
+.container a {
+  text-decoration: none;
+  color: black;
+}
+.container a:active {
+  font-weight: 800;
+}
+.container ul {
+  width: 200px;
+  padding-left: 15px;
+}
+.container li {
+  padding: 5px;
+  margin-bottom: 10px;
+  list-style-type: none;
+  border-radius: 5px;
+}
+.container li:hover {
+  background-color: #eaeaea;
+}/*# sourceMappingURL=SideNav.module.css.map */

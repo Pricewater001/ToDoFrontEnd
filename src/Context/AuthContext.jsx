@@ -3,6 +3,7 @@ import React, { createContext, useEffect, useState } from 'react';
 export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [user, setUser] = useState({});
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -13,9 +14,11 @@ export const AuthProvider = ({ children }) => {
     }
   });
 
-  const login = () => {
+  const login = (data) => {
+    console.log("context " , data);
     setIsLoggedIn(true);
-    // localStorage.setItem('token', 'test');
+    setUser(data)
+    localStorage.setItem('token', data.token);
   };
 
   const logout = () => {
@@ -27,6 +30,7 @@ export const AuthProvider = ({ children }) => {
     isLoggedIn,
     login,
     logout,
+    user
   };
 
   return (

@@ -4,9 +4,11 @@ import NotFound from "./pages/NotFound";
 import { useContext } from "react";
 import { AuthContext } from "./Context/AuthContext";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import "../src/index.css";
 
 function App() {
   const { isLoggedIn } = useContext(AuthContext);
+
 
   const router = createBrowserRouter([
     {

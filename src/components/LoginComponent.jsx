@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   Button,
   Checkbox,
@@ -12,17 +12,36 @@ import {
   HStack,
   Box,
   useBreakpointValue,
+  useToast,
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import ShadowBox from "./ShadowBox";
+import { gql, useMutation } from "@apollo/client";
 import "../assets/css/loging.css";
+import { AuthContext } from "../Context/AuthContext";
+
+const loginGraph = gql`
+  mutation Register($loginInput: LoginInput) {
+    login(loginInput: $loginInput) {
+      id
+      username
+      email
+      createdAt
+      updatedAt
+      token
+    }
+  }
+`;
 
 const LoginForm = ({ setShowLoginForm }) => {
+  const [loginUser, { loading, error }] = useMutation(loginGraph);
+  const toast = useToast();
   const { handleSubmit, errors, register } = useForm();
   const [show, setShow] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
+  const { login } = useContext(AuthContext);
 
   const handleClick = () => setShow(!show);
 
@@ -63,24 +82,33 @@ const LoginForm = ({ setShowLoginForm }) => {
       });
       return;
     }
-
-    if (password !== confirmPassword) {
-      toast({
-        title: "Error",
-        description: "The passwords do not match",
-        status: "error",
-        duration: 9000,
-        isClosable: true,
-      });
-      return;
-    }
     const data = {
       email,
       password,
       rememberMe,
     };
 
-    console.log("Form data", data);
+    loginUser({
+      variables: {
+        loginInput: {
+          email: email,
+          password: password,
+        },
+      },
+    })
+      .then(({ data }) => {
+        login(data.login);
+      })
+      .catch((error) => {
+        toast({
+          title: "Error",
+          description: error.message,
+          status: "error",
+          duration: 9000,
+          isClosable: true,
+        });
+        return;
+      });
   };
 
   const columnCount = useBreakpointValue({ base: 1, md: 2 });

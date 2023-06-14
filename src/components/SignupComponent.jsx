@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   useToast,
   Button,
@@ -16,6 +16,21 @@ import {
 import { useForm } from "react-hook-form";
 import ShadowBox from "./ShadowBox";
 import "../assets/css/loging.css";
+import { gql, useMutation } from "@apollo/client";
+import { AuthContext } from "../Context/AuthContext";
+
+const register2 = gql`
+  mutation Register($registerInput: RegisterInput) {
+    register(registerInput: $registerInput) {
+      id
+      username
+      email
+      createdAt
+      updatedAt
+      token
+    }
+  }
+`;
 
 const Signup = ({ setShowLoginForm }) => {
   const { handleSubmit, errors, register } = useForm();
@@ -24,8 +39,77 @@ const Signup = ({ setShowLoginForm }) => {
   const [show, setShow] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const toast = useToast()
+  const toast = useToast();
   const [confirmPassword, setConfirmPassword] = useState("");
+  const { login } = useContext(AuthContext);
+
+
+  const [createUser, { loading, error }] = useMutation(register2);
+
+  const onSubmit = async () => {
+    if (!email) {
+      toast({
+        title: "Error",
+        description: "Please Enter a valid Email",
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+      });
+      return;
+    }
+    if (!password) {
+      toast({
+        title: "Error",
+        description: "Please Enter a valid password",
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+      });
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      toast({
+        title: "Error",
+        description: "The passwords do not match",
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+      });
+      return;
+    }
+    const data = {
+      email,
+      password,
+      confirmPassword,
+      rememberMe,
+    };
+
+    createUser({
+      variables: {
+        registerInput: {
+          username: email,
+          email,
+          password,
+          confirmPassword,
+        },
+      },
+    })
+      .then(({data}) => {
+        const {register} = data; 
+        login(register)
+      })
+      .catch((error) => {
+        toast({
+          title: "Error",
+          description: error.message,
+          status: "error",
+          duration: 9000,
+          isClosable: true,
+        });
+        return;
+      });
+  };
 
   const handleClick = () => setShow(!show);
 
@@ -49,48 +133,6 @@ const Signup = ({ setShowLoginForm }) => {
 
   const handleSwitchToLogin = () => {
     setShowLoginForm(true);
-  };
-
-  const onSubmit = async () => {
-    if(!email){
-      toast({
-        title: 'Error',
-        description: "Please Enter a valid Email",
-        status: 'error',
-        duration: 9000,
-        isClosable: true,
-      })
-      return;
-    }
-    if(!password){
-      toast({
-        title: 'Error',
-        description: "Please Enter a valid password",
-        status: 'error',
-        duration: 9000,
-        isClosable: true,
-      })
-      return;
-    }
-  
-    if (password !== confirmPassword) {
-      toast({
-        title: 'Error',
-        description: "The passwords do not match",
-        status: 'error',
-        duration: 9000,
-        isClosable: true,
-      })
-      return;
-    }
-    const data = {
-      email,
-      password,
-      confirmPassword,
-      rememberMe
-    };
-
-    console.log("Form data", data);
   };
 
   return (

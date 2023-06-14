@@ -27,11 +27,16 @@ function TasksList() {
           <h2>My To-Do List</h2>
           <button onClick={onOpen}>
             <span title="Add New Task">
-              <img  src={addIcon} alt="" />
+              <img src={addIcon} alt="" />
             </span>
           </button>
         </div>
-        <TaskCard title="Task 1" description="Create React App" button1='Edit' button2='Mark as Done'/>
+        <TaskCard
+          title="Task 1"
+          description="Create React App"
+          button1="Edit"
+          button2="Mark as Done"
+        />
       </div>
 
       <Modal isOpen={isOpen} onClose={onClose}>
@@ -50,9 +55,11 @@ function TasksList() {
 
           <ModalFooter>
             <Button colorScheme="orange" mr={3} type="submit">
-              Edit
+              Add
             </Button>
-            <Button onClick={onClose} variant="ghost">Cancel</Button>
+            <Button onClick={onClose} variant="ghost">
+              Cancel
+            </Button>
           </ModalFooter>
         </ModalContent>
       </Modal>

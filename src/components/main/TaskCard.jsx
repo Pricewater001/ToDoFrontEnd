@@ -32,7 +32,7 @@ const TaskCard = ({ title, description, button1, button2 }) => {
   return (
     <>
       <Box className={styles.container}>
-        <Card size='sm' maxW="450px">
+        <Card size="sm" maxW="450px">
           <CardBody>
             <Stack mt="6" spacing="3">
               <Heading size="md">{title}</Heading>

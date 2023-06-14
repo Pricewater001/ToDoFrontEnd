@@ -28,7 +28,7 @@ function Hero() {
             colorScheme="whiteAlpha"
             variant="outline"
             size="sm"
-            width="40%"
+            marginTop='2%'
           >
             Explore more services
           </Button>

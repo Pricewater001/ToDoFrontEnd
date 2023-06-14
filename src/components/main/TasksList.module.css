@@ -1,20 +1,41 @@
-.container {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  padding: 20px;
-  width: 40%;
+@media screen and (min-width: 1100px) {
+  .container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    width: 35%;
+  }
+  .container h2 {
+    font-size: 26px;
+    font-weight: 600;
+  }
+  .title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .title img {
+    width: 25px;
+  }
 }
-.container h2 {
-  font-size: 26px;
-  font-weight: 600;
-}
-
-.title {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.title img {
-  width: 25px;
+@media screen and (max-width: 1100px) {
+  .container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+  }
+  .container h2 {
+    font-size: 26px;
+    font-weight: 600;
+  }
+  .title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .title img {
+    width: 25px;
+  }
 }/*# sourceMappingURL=TasksList.module.css.map */

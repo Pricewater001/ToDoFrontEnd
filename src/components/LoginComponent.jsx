@@ -16,6 +16,7 @@ import {
 import { useForm } from "react-hook-form";
 import ShadowBox from "./ShadowBox";
 import "../assets/css/loging.css";
+import bgImg from '../assets/PwC_Geom_Illus_RGB_28.png'
 
 const LoginForm = ({ setShowLoginForm }) => {
   const { handleSubmit, errors, register } = useForm();
@@ -86,14 +87,15 @@ const LoginForm = ({ setShowLoginForm }) => {
   const columnCount = useBreakpointValue({ base: 1, md: 2 });
 
   return (
+    <>
     <ShadowBox>
-      <Text fontSize="4xl" color="white">
+      <Text fontSize="4xl" color="black">
         TO DO LIST
       </Text>
-      <Text fontSize="6xl" width="100%" color="white">
-        It's nice to have you back
+      <Text fontSize="6xl" width="100%" color="black">
+        It's Nice to Have You Back
       </Text>
-      <Text mb="8px" mt={4} color="white">
+      <Text mb="8px" mt={4} color="black">
         USERNAME
       </Text>
       <InputGroup size="md" mt={4}>
@@ -103,19 +105,22 @@ const LoginForm = ({ setShowLoginForm }) => {
           bg="white"
           value={email}
           onChange={handleEmailChange}
+          focusBorderColor='white'
         />
       </InputGroup>
       <div>
-        <Text mb="8px" mt={4} color="white">
+        <Text mb="8px" mt={4} color="black">
           PASSWORD
         </Text>
-        <InputGroup size="md" mt={2}>
+        <InputGroup size="md" mt={2} maxW='50%'>
           <Input
             type={show ? "text" : "password"}
             placeholder="Enter password"
             value={password}
             onChange={handlePasswordChange}
             bg="white"
+            focusBorderColor='white'
+
           />
           <InputRightElement width="4.5rem">
             <Button h="1.75rem" size="sm" onClick={handleClick}>
@@ -130,15 +135,15 @@ const LoginForm = ({ setShowLoginForm }) => {
           flex={columnCount === 2 ? "0 0 auto" : "1"}
         >
           <Checkbox
-            colorScheme="white"
+            colorScheme="black"
             isChecked={rememberMe}
             onChange={handleRememberMeChange}
             mt={2}
-            color="white"
+            color="black"
           >
             Remember Me
           </Checkbox>
-          <Link href="#" color="white" mt={2}>
+          <Link href="#" color="black" mt={2}>
             Forgot Password
           </Link>
         </VStack>
@@ -155,7 +160,7 @@ const LoginForm = ({ setShowLoginForm }) => {
       </HStack>
       <Button
         bg="transparent"
-        color="white"
+        color="black"
         variant="link"
         mt={4}
         onClick={handleSwitchToLogin}
@@ -163,6 +168,7 @@ const LoginForm = ({ setShowLoginForm }) => {
         Dont have an account ? Sign up
       </Button>
     </ShadowBox>
+    </>
   );
 };
 

@@ -4,6 +4,7 @@ export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState({});
+  const [flag, setFlag] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -31,7 +32,9 @@ export const AuthProvider = ({ children }) => {
     isLoggedIn,
     login,
     logout,
-    user
+    user,
+    flag,
+    setFlag
   };
 
   return (

@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./TasksList.module.css";
 import addIcon from "../../assets/PwC_Funct_Icons_Plus_Outline_Black_RGB.png";
 import TaskCard from "../main/TaskCard";
-import { gql, useMutation } from "@apollo/client";
+import { gql, useMutation, useQuery } from "@apollo/client";
 import {
   Button,
   useDisclosure,
@@ -22,6 +22,7 @@ import {
 const createTask = gql`
   mutation Register($taskInput: TaskInput) {
     createTask(taskInput: $taskInput) {
+      _id
       name
       description
       createdAt
@@ -32,18 +33,67 @@ const createTask = gql`
         email
         createdAt
         updatedAt
-        token
       }
     }
   }
 `;
 
+const GET_Tasks = gql`
+  query GetUserTasks {
+    getUserTasks {
+      _id
+      name
+      description
+      createdAt
+      isDone
+    }
+  }
+`;
+
 function TasksList() {
-  const [toCreateTask, { loading, error }] = useMutation(createTask);
+  const [toCreateTask, { loading: mutationLoading, error: mutationError }] =
+    useMutation(createTask);
+  const {
+    loading: queryLoading,
+    error: queryError,
+    data,
+    refetch,
+  } = useQuery(GET_Tasks, {
+    context: {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    },
+  });
+
   const toast = useToast();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [taskTitle, setTaskTitle] = useState("");
   const [taskDescription, setTaskDescription] = useState("");
+  const [tasks, setTasks] = useState([]);
+
+  const fetchTasks = async () => {
+    try {
+      await refetch();
+
+      if (queryLoading) {
+        console.log("Loading...");
+      }
+
+      if (queryError) {
+        console.log("Error:", queryError);
+      }
+
+      const tasks = data?.getUserTasks || [];
+      const updatedTasks = tasks
+        .filter((task) => !task.isDone)
+        .sort((a, b) => b.createdAt.localeCompare(a.createdAt));
+        console.log(updatedTasks);
+      setTasks(updatedTasks);
+    } catch (error) {
+      console.log("Error fetching tasks:", error);
+    }
+  };
 
   const handleTaskTitleChange = (e) => {
     setTaskTitle(e.target.value);
@@ -53,13 +103,9 @@ function TasksList() {
     setTaskDescription(e.target.value);
   };
 
-  const handleSubmit = () => {
-
-    setTaskTitle("");
-    setTaskDescription("");
-
+  const createTaskFunc = () => {
     const token = localStorage.getItem("token");
-    
+
     toCreateTask({
       variables: {
         taskInput: {
@@ -75,9 +121,13 @@ function TasksList() {
       },
     })
       .then(({ data }) => {
-        console.log(data);
+        console.log("New task created:", data.createTask);
+
+        fetchTasks();
       })
       .catch((error) => {
+        console.log(error);
+
         toast({
           title: "Error",
           description: error.message,
@@ -85,11 +135,20 @@ function TasksList() {
           duration: 9000,
           isClosable: true,
         });
-        return;
       });
+  };
 
+  const handleSubmit = () => {
+    setTaskTitle("");
+    setTaskDescription("");
+
+    createTaskFunc();
     onClose();
   };
+
+  useEffect(() => {
+    fetchTasks();
+  }, [data]);
 
   return (
     <>
@@ -102,12 +161,20 @@ function TasksList() {
             </span>
           </button>
         </div>
-        <TaskCard
-          title="Task 1"
-          description="Create React App"
-          button1="Edit"
-          button2="Mark as Done"
-        />
+        {tasks.length > 0 ? (
+          tasks.map((task, index) => (
+            <TaskCard
+              key={index}
+              id = {task._id}
+              title={task.name}
+              description={task.description}
+              button1="Edit"
+              button2="Mark as Done"
+            />
+          ))
+        ) : (
+          <h1>There are no new tasks.</h1>
+        )}
       </div>
 
       <Modal isOpen={isOpen} onClose={onClose}>

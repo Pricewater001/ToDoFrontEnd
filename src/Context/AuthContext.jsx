@@ -18,6 +18,7 @@ export const AuthProvider = ({ children }) => {
     console.log("context " , data);
     setIsLoggedIn(true);
     setUser(data)
+    console.log(data);
     localStorage.setItem('token', data.token);
   };
 

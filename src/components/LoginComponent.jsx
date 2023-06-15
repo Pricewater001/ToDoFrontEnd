@@ -34,6 +34,7 @@ const loginGraph = gql`
 `;
 
 const LoginForm = ({ setShowLoginForm }) => {
+
   const [loginUser, { loading, error }] = useMutation(loginGraph);
   const toast = useToast();
   const { handleSubmit, errors, register } = useForm();
@@ -42,7 +43,6 @@ const LoginForm = ({ setShowLoginForm }) => {
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
   const { login } = useContext(AuthContext);
-
   const handleClick = () => setShow(!show);
 
   const handleEmailChange = (e) => {
@@ -176,8 +176,7 @@ const LoginForm = ({ setShowLoginForm }) => {
           color="white"
           variant="solid"
           mt={2}
-          onClick={handleSubmit(onSubmit)}
-        >
+          onClick={handleSubmit(onSubmit)}>
           Log in
         </Button>
       </HStack>
@@ -186,9 +185,8 @@ const LoginForm = ({ setShowLoginForm }) => {
         color="white"
         variant="link"
         mt={4}
-        onClick={handleSwitchToLogin}
-      >
-        Dont have an account ? Sign up
+        onClick={handleSwitchToLogin}>
+        Don't have an account ? Sign up
       </Button>
     </ShadowBox>
   );
